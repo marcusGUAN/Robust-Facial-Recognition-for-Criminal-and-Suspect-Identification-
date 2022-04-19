@@ -56,7 +56,7 @@ def predictor(img):
     image = get_embedding(image)
     image = np.expand_dims(image, axis=0)
     #Loading trained model using pickle library
-    model = pickle.load(open(r'.\support_vector_classifier.sav', 'rb'))
+    model = pickle.load(open('support_vector_classifier.sav', 'rb'))
     #Inference
     prediction = model.predict(image)
     #Getting the label of predicted image
