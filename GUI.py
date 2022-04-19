@@ -38,7 +38,7 @@ def extract_face(filename, required_size=(160, 160)):
 
 #To acquire the embedding for the input image
 def get_embedding(face):
-    model = load_model("E:/APU/APU work/FYP/FYP_criminal/FYP_GUI/facenet_keras.h5")
+    model = load_model("facenet_keras.h5")
     # scale pixel values
     face = face.astype('float32')
     # standardization
