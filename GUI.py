@@ -21,20 +21,24 @@ uploaded_image = st.file_uploader("Upload the Image",type=['png', 'jpg'])
 
 #To extract the detected face and pass it into the model
 def extract_face(filename, required_size=(160, 160)):
-    image = Image.open(filename)
-    image = image.convert('RGB')
-    pixels = np.asarray(image)
-    detector = MTCNN()
-    face = detector.detect_faces(pixels)
-    x1,y1,w,h = face[0]['box']
-    x1, y1 = abs(x1), abs(y1)
-    x2 = abs(x1+w)
-    y2 = abs(y1+h)
-    face_output = pixels[y1:y2,x1:x2]
-    image = Image.fromarray(face_output,'RGB')
-    image = image.resize((160,160))
-    face_array = np.asarray(image)
-    return face_array
+    try:
+        image = Image.open(filename)
+        image = image.convert('RGB')
+        pixels = np.asarray(image)
+        detector = MTCNN()
+        face = detector.detect_faces(pixels)
+        x1,y1,w,h = face[0]['box']
+        x1, y1 = abs(x1), abs(y1)
+        x2 = abs(x1+w)
+        y2 = abs(y1+h)
+        face_output = pixels[y1:y2,x1:x2]
+        image = Image.fromarray(face_output,'RGB')
+        image = image.resize((160,160))
+        face_array = np.asarray(image)
+        return face_array
+    except:
+        st.error("Error.Please only upload a human image")
+        st.stop()
 
 #To acquire the embedding for the input image
 def get_embedding(face):
@@ -66,6 +70,7 @@ def predictor(img):
     #Calculating probability that face matches
     probability = model.predict_proba(image)
     class_probability = probability[0] * 100
+    #select the highest probability
     confidence = max(class_probability)
 
     return predicted_name[0], confidence
@@ -100,7 +105,7 @@ if uploaded_image is not None:
                     cv2.rectangle(pixels, (x, y), (x2, y2), (255, 0, 0), 2)
                     cv2.putText(pixels, prediction_output[0], (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2, cv2.LINE_AA)
 
-            #display input image with bounding box
+            #display result image with bounding box
             st.image(pixels)
             #show recognition results
             st.write("Recognised as:", prediction_output[0])
