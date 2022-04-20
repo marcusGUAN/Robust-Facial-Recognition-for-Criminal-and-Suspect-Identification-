@@ -9,10 +9,10 @@ from PIL import Image
 from mtcnn.mtcnn import MTCNN
 from sklearn.preprocessing import LabelEncoder
 
-st.title('Criminal Face Recognition')
+st.title('Robust Facial Recognition for Criminal and Suspect Identification')
 
 with st.expander("User Manual: How to Use"):
-    st.write("1. Upload a celebrity image. The image can be celebrities wearing masks, glasses, hat etc.")
+    st.write("1. Upload a celebrity image. The image can be celebrities with or without masks, glasses, hat etc.")
     st.write("2. Wait for the system to complete running the prediction")
     st.write("3. View the output result with bounding box, recognition result and confidence level")
     st.write("4. Thank you for using the system")
