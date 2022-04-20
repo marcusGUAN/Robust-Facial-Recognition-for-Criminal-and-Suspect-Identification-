@@ -37,7 +37,7 @@ def extract_face(filename, required_size=(160, 160)):
         face_array = np.asarray(image)
         return face_array
     except:
-        st.error("Error.Please only upload a human image")
+        st.error("Error: Please only upload a human image")
         st.stop()
 
 #To acquire the embedding for the input image
