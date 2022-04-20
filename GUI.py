@@ -17,7 +17,7 @@ with st.expander("User Manual: How to Use"):
     st.write("3. View the output result with bounding box, recognition result and confidence level")
     st.write("4. Thank you for using the system")
 
-uploaded_image = st.file_uploader("Upload the Image")
+uploaded_image = st.file_uploader("Upload the Image",type=['png', 'jpg'])
 
 #To extract the detected face and pass it into the model
 def extract_face(filename, required_size=(160, 160)):
